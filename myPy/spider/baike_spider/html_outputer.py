@@ -8,6 +8,9 @@ class HtmlOutputer(object):
         score = data["score"]
         word_count = data["word_count"]
         word_click = data["word_click_num"]
+        if score is None or word_count is None or word_click is None:
+            return
+
         if float(score) >= basescore and float(word_count) >= basewordcount and float(word_click) >= basewordclick:
                   self.datas.append(data)
                   count += 1
