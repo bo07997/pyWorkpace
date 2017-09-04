@@ -4,6 +4,7 @@ class HtmlOutputer(object):
         self.datas = []
         self.lock = threading.Lock()
     def collect_data(self, data, count, basescore, basewordcount, basewordclick):
+
         if data is None:
             return
         score = data["score"]
@@ -29,6 +30,7 @@ class HtmlOutputer(object):
         for data in self.datas:
             if i == 0:
                 fout.write("<tr>")
+                fout.write("<td>序号<td>")
                 fout.write("<td>小说名<td>")
                 fout.write("<td>地址<td>")
                 fout.write("<td>类别<td>")
@@ -39,6 +41,7 @@ class HtmlOutputer(object):
                 fout.write("<tr>")
                 i += 1
             fout.write("<tr>")
+            fout.write("<td>%s<td>" %i)
             fout.write("<td>%s<td>" %data['title'])
             fout.write("<td>%s<td>" %data['url'])
             fout.write("<td>%s<td>" %data['book_category'])
@@ -47,6 +50,7 @@ class HtmlOutputer(object):
             fout.write("<td>%s<td>" %data['word_click_num'])
             fout.write("<td>%s<td>" %data['summary'])
             fout.write("<tr>")
+            i += 1
         fout.write("<table>")    
         fout.write("<body>")
         fout.write("<html>")
