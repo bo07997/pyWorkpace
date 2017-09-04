@@ -1,7 +1,8 @@
+import threading
 class HtmlOutputer(object):
     def __init__(self):
         self.datas = []
-    
+        self.lock = threading.Lock()
     def collect_data(self, data, count, basescore, basewordcount, basewordclick):
         if data is None:
             return
@@ -17,6 +18,7 @@ class HtmlOutputer(object):
         return count
     
     def output_html(self):
+        self.lock.acquire()
         fout = open('output.html', 'w', encoding='UTF-8')
         fout.write("<html>")
         fout.write("<body>")
